@@ -30,6 +30,10 @@ public class User {
     @NotBlank
     private String name;
 
+    @Column(nullable = false)
+    @NotBlank
+    private String role;
+
     @Column(nullable = false, unique = true)
     @NotBlank
     @Email
