@@ -75,7 +75,18 @@
 			<artifactId>passay</artifactId>
 			<version>1.6.2</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.github.slugify</groupId>
+			<artifactId>slugify</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
