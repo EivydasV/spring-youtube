@@ -1,6 +1,7 @@
 package com.project.youtube.video;
 
 import com.github.slugify.Slugify;
+import com.project.youtube.channel.Channel;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -53,6 +54,10 @@ public class Video {
 
     @UpdateTimestamp
     private Date updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "channel_id", nullable = false)
+    private Channel channel;
 
     @PrePersist
     public void generateSlugForTitle() {

@@ -1,6 +1,7 @@
 package com.project.youtube.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.youtube.channel.Channel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -48,6 +49,10 @@ public class User {
     @NotNull
     @Positive
     private Integer age;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Channel channel;
 
     @Override
     public boolean equals(Object o) {
