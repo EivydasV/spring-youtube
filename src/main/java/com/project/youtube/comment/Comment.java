@@ -1,4 +1,4 @@
-package com.project.youtube.channel;
+package com.project.youtube.comment;
 
 import com.project.youtube.user.User;
 import com.project.youtube.video.Video;
@@ -10,28 +10,29 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Table(name = "channels")
 @Data
-public class Channel {
+@Entity
+@Table(name = "comments")
+public class Comment {
+
     @Id
     @GeneratedValue
     private UUID id;
 
-    @Column(nullable = false, unique = true)
-    @Size(max = 100, message = "{validation.name.size.too_long}")
+    @Column(nullable = false)
+    @Size(max = 10000, message = "{validation.name.size.too_long}")
     @NotBlank
-    private String name;
+    private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "video_id", nullable = false)
+    private Video belongsTo;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User createdBy;
-
-    @OneToMany(mappedBy = "channel")
-    private Set<Video> videos;
+    private User commentBy;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

@@ -2,6 +2,7 @@ package com.project.youtube.video;
 
 import com.github.slugify.Slugify;
 import com.project.youtube.channel.Channel;
+import com.project.youtube.comment.Comment;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -58,6 +60,9 @@ public class Video {
     @ManyToOne
     @JoinColumn(name = "channel_id", nullable = false)
     private Channel channel;
+
+    @OneToMany(mappedBy = "video")
+    private Set<Comment> comments;
 
     @PrePersist
     public void generateSlugForTitle() {

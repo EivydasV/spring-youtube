@@ -7,12 +7,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -53,6 +56,13 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Channel channel;
+
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    private Date updatedAt;
 
     @Override
     public boolean equals(Object o) {
