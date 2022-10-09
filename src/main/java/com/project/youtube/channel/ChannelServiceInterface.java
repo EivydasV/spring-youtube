@@ -12,5 +12,4 @@ public interface ChannelServiceInterface {
     Channel saveVideo(Channel channel);
     Optional<Channel> findById(UUID id);
     Optional<Channel> findByName(String name);
-    Optional<Channel> findByCreatedBy(UUID id);
 }

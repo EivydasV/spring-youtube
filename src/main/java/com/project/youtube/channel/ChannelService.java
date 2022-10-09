@@ -21,21 +21,16 @@ public class ChannelService implements ChannelServiceInterface {
 
     @Override
     public Channel saveVideo(Channel channel) {
-        return null;
+        return channelRepository.save(channel);
     }
 
     @Override
     public Optional<Channel> findById(UUID id) {
-        return Optional.empty();
+        return channelRepository.findById(id);
     }
 
     @Override
     public Optional<Channel> findByName(String name) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Channel> findByCreatedBy(UUID id) {
-        return Optional.empty();
+        return channelRepository.findByName(name);
     }
 }

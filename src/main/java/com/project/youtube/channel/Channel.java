@@ -2,7 +2,8 @@ package com.project.youtube.channel;
 
 import com.project.youtube.user.User;
 import com.project.youtube.video.Video;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -10,15 +11,20 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "channels")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Channel {
     @Id
     @GeneratedValue
+    @Column(updatable = false)
     private UUID id;
 
     @Column(nullable = false, unique = true)
@@ -26,11 +32,11 @@ public class Channel {
     @NotBlank
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User createdBy;
+    @OneToOne(mappedBy = "channel", optional = false)
+    private User user;
 
     @OneToMany(mappedBy = "channel")
+    @ToString.Exclude
     private Set<Video> videos;
 
     @CreationTimestamp
@@ -39,4 +45,17 @@ public class Channel {
 
     @UpdateTimestamp
     private Date updatedAt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Channel channel = (Channel) o;
+        return id != null && Objects.equals(id, channel.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

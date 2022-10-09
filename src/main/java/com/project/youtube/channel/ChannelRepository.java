@@ -7,6 +7,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ChannelRepository extends JpaRepository<UUID, Channel> {
+public interface ChannelRepository extends JpaRepository<Channel, UUID> {
     Optional<Channel> findByName(String name);
 }

@@ -2,6 +2,7 @@ package com.project.youtube.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.youtube.channel.Channel;
+import com.project.youtube.comment.Comment;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -28,6 +30,7 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue
+    @Column(updatable = false)
     private UUID id;
 
     @Column(nullable = false)
@@ -53,9 +56,13 @@ public class User {
     @Positive
     private Integer age;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "channel_id")
     private Channel channel;
+
+    @OneToMany(mappedBy = "comments")
+    @ToString.Exclude
+    private Set<Comment> comments;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
