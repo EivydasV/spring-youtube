@@ -3,10 +3,7 @@ package com.project.youtube.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.youtube.channel.Channel;
 import com.project.youtube.comment.Comment;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -57,7 +54,7 @@ public class User {
     private Integer age;
 
     @OneToOne
-    @JoinColumn(name = "channel_id")
+    @JoinColumn(name = "channel_id", referencedColumnName = "id")
     private Channel channel;
 
     @OneToMany(mappedBy = "comments")

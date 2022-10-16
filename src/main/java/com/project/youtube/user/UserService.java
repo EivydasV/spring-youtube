@@ -1,5 +1,7 @@
 package com.project.youtube.user;
 
+import com.project.youtube.user.dto.body.CreateUserDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,14 +16,19 @@ public class UserService implements UserServiceInterface {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @Override
     public Page<User> findAll(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public User createUser(CreateUserDTO user) {
+        User userEntity = modelMapper.map(user, User.class);
+        userEntity.setRole("USER");
+        return userRepository.save(userEntity);
     }
 
     @Override

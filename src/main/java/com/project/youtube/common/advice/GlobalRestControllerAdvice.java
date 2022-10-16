@@ -1,6 +1,7 @@
 package com.project.youtube.common.advice;
 
 import com.project.youtube.common.exception.ApiException;
+import com.project.youtube.common.exception.BadRequestException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,6 +71,16 @@ public class GlobalRestControllerAdvice {
     ResponseEntity<ApiException> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex){
         return new ResponseEntity<>(ApiException.builder()
                 .message("Please provide valid JSON body")
+                .status(HttpStatus.BAD_REQUEST)
+                .build(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    ResponseEntity<ApiException> handleBadRequestException(BadRequestException ex){
+        return new ResponseEntity<>(ApiException.builder()
+                .message(ex.getMessage())
                 .status(HttpStatus.BAD_REQUEST)
                 .build(),
                 HttpStatus.BAD_REQUEST

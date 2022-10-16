@@ -1,6 +1,7 @@
 package com.project.youtube.channel;
 
 
+import com.project.youtube.channel.dto.body.CreateChannelDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class ChannelController {
     ChannelServiceInterface channelService;
 
     @PostMapping
-    Channel createChannel(@Valid @RequestBody Channel channel){
-        return channelService.saveVideo(channel);
+    Channel createChannel(@Valid @RequestBody CreateChannelDTO channel){
+        return channelService.saveChannel(channel);
     }
 }

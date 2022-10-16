@@ -1,5 +1,6 @@
 package com.project.youtube.user;
 
+import com.project.youtube.user.dto.body.CreateUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-     User createUser(@Valid @RequestBody User user){
+     User createUser(@Valid @RequestBody CreateUserDTO user){
         return userService.createUser(user);
     }
 

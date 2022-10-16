@@ -1,5 +1,6 @@
 package com.project.youtube.channel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.youtube.user.User;
 import com.project.youtube.video.Video;
 import lombok.*;
@@ -32,10 +33,10 @@ public class Channel {
     @NotBlank
     private String name;
 
-    @OneToOne(mappedBy = "channel", optional = false)
+    @OneToOne(mappedBy = "channel")
     private User user;
 
-    @OneToMany(mappedBy = "channel")
+    @OneToMany(mappedBy = "channel", fetch = FetchType.LAZY)
     @ToString.Exclude
     private Set<Video> videos;
 
