@@ -57,15 +57,15 @@ public class GlobalRestControllerAdvice {
         );
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    ResponseEntity<ApiException> handleDataIntegrityViolationException(DataIntegrityViolationException ex){
-        return new ResponseEntity<>(ApiException.builder()
-                .message(ex.getMessage())
-                .status(HttpStatus.BAD_REQUEST)
-                .build(),
-                HttpStatus.BAD_REQUEST
-        );
-    }
+//    @ExceptionHandler(DataIntegrityViolationException.class)
+//    ResponseEntity<ApiException> handleDataIntegrityViolationException(DataIntegrityViolationException ex){
+//        return new ResponseEntity<>(ApiException.builder()
+//                .message(ex.getMessage())
+//                .status(HttpStatus.BAD_REQUEST)
+//                .build(),
+//                HttpStatus.BAD_REQUEST
+//        );
+//    }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     ResponseEntity<ApiException> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex){

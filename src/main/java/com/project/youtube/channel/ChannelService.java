@@ -34,6 +34,7 @@ public class ChannelService implements ChannelServiceInterface {
     public Channel saveChannel(CreateChannelDTO channel) {
         Channel channelEntity = modelMapper.map(channel, Channel.class);
         User user = userService.findById(channel.getUser()).orElseThrow();
+        System.out.println(user);
         if(user.getChannel() != null){
             throw new BadRequestException("User already has a channel");
         }
