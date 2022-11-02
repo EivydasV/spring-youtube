@@ -1,5 +1,6 @@
 package com.project.youtube.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.youtube.channel.Channel;
 import com.project.youtube.comment.Comment;
@@ -53,8 +54,8 @@ public class User {
     @Positive
     private Integer age;
 
-    @OneToOne
-    @JoinColumn(name = "channel_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "user")
+    @JsonIgnore
     private Channel channel;
 
     @OneToMany(mappedBy = "comments")

@@ -33,11 +33,13 @@ public class Channel {
     @NotBlank
     private String name;
 
-    @OneToOne(mappedBy = "channel")
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @OneToMany(mappedBy = "channel", fetch = FetchType.LAZY)
     @ToString.Exclude
+    @JsonIgnore
     private Set<Video> videos;
 
     @CreationTimestamp

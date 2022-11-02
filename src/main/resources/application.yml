@@ -1,9 +1,5 @@
 
 spring:
-  devtools:
-    restart:
-      poll-interval: 2s
-      quiet-period: 1s
   data:
     web:
       pageable:
@@ -22,8 +18,9 @@ spring:
     remote:
       secret: "mysecret"
   datasource:
+    platform: postgres
     username: postgres
-    url: jdbc:postgresql://postgres:5432/posts
+    url: jdbc:postgresql://localhost:5432/postgres
     password: postgres
   jpa:
     properties:

@@ -1,5 +1,6 @@
 package com.project.youtube.video;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.slugify.Slugify;
 import com.project.youtube.channel.Channel;
 import com.project.youtube.comment.Comment;
@@ -62,12 +63,14 @@ public class Video {
     @UpdateTimestamp
     private Date updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "channel_id", nullable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "channel_id")
+    @JsonIgnore
     private Channel channel;
 
     @OneToMany(mappedBy = "comments")
     @ToString.Exclude
+    @JsonIgnore
     private Set<Comment> comments;
 
     @PrePersist

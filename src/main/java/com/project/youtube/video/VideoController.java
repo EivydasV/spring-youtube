@@ -1,5 +1,6 @@
 package com.project.youtube.video;
 
+import com.project.youtube.video.dto.body.CreateVideoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ public class VideoController {
     VideoServiceInterface videoService;
 
     @PostMapping
-    Video createVideo(@Valid @RequestBody Video video){
+    Video createVideo(@Valid @RequestBody CreateVideoDto video){
         return videoService.saveVideo(video);
     }
 

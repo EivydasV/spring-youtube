@@ -1,6 +1,8 @@
 package com.project.youtube.video;
 
-import com.project.youtube.user.User;
+import com.project.youtube.channel.ChannelService;
+import com.project.youtube.video.dto.body.CreateVideoDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +17,10 @@ public class VideoService implements VideoServiceInterface {
     @Autowired
     VideoRepository videoRepository;
 
+    @Autowired
+    ChannelService channelService;
+    @Autowired
+    ModelMapper modelMapper;
 
     @Override
     public Page<Video> findAll(Pageable pageable) {
@@ -22,8 +28,16 @@ public class VideoService implements VideoServiceInterface {
     }
 
     @Override
-    public Video saveVideo(Video video) {
-        return videoRepository.save(video);
+    public Video saveVideo(CreateVideoDto video) {
+        Video videoEntity = modelMapper.map(video, Video.class);
+
+        channelService.findById(video.getChannelId()).ifPresentOrElse(
+                videoEntity::setChannel,
+                () -> {
+                    throw new RuntimeException("Channel not found");
+                }
+        );
+        return videoRepository.save(videoEntity);
     }
 
     @Override
