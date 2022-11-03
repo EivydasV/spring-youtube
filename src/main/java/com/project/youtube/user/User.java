@@ -60,6 +60,7 @@ public class User {
 
     @OneToMany(mappedBy = "comments")
     @ToString.Exclude
+    @JsonIgnore
     private Set<Comment> comments;
 
     @CreationTimestamp
